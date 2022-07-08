@@ -10,20 +10,29 @@ class Stats(Actor):
         super().__init__(debug)
         self._level = 1
         self._lives = DEFAULT_LIVES
-        self._score = 0
+        self._player_1_score = 0
+        self._player_2_score = 0
 
     def add_life(self):
         """Adds one life."""
         if self._lives < MAXIMUM_LIVES:
             self._lives += 1 
 
-    def add_points(self, points):
+    def add_points_1(self, points):
         """Adds the given points to the score.
         
         Args:
             points: A number representing the points to add.
         """
-        self._score += points
+        self._player_1_score += points
+
+    def add_points_2(self, points):
+        """Adds the given points to the score.
+        
+        Args:
+            points: A number representing the points to add.
+        """
+        self._player_2_score += points
 
     def get_level(self):
         """Gets the level.
