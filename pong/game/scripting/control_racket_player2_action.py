@@ -9,11 +9,11 @@ class ControlRacketAction(Action):
         
     def execute(self, cast, script, callback):
         racket = cast.get_first_actor(RACKET_GROUP)
-        if self._keyboard_service.is_key_down(UP): 
+        if self._keyboard_service.is_key_down("w"): 
             racket.swing_up()
-        elif self._keyboard_service.is_key_down(DOWN): 
+        elif self._keyboard_service.is_key_down("S"): 
             racket.swing_down()  
         else: 
             racket.stop_moving()    
 
-            #changed the keyboard service from left and right to up and down arrows to align with game.    For single player mode.
+            #changed the keyboard service from up and down to w and s for two player mode.
