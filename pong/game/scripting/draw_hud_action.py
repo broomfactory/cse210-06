@@ -8,11 +8,11 @@ class DrawHudAction(Action):
         self._video_service = video_service
         
     def execute(self, cast, script, callback):
-        pass
-        #stats = cast.get_first_actor(STATS_GROUP)
+        
+        stats = cast.get_first_actor(STATS_GROUP)
         #self._draw_label(cast, LEVEL_GROUP, LEVEL_FORMAT, stats.get_level())
         #self._draw_label(cast, LIVES_GROUP, LIVES_FORMAT, stats.get_lives())
-        #self._draw_label(cast, SCORE_GROUP, SCORE_FORMAT, stats.get_score())
+        self._draw_label(cast, SCORE_GROUP, SCORE_FORMAT, stats.get_score())
 
     # **********************************************************************************************
     # You found the bug. Great job!

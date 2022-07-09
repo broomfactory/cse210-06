@@ -81,7 +81,7 @@ class SceneManager:
         self._add_stats(cast)
         #self._add_level(cast)
         #self._add_lives(cast)
-        #self._add_score(cast)
+        self._add_score(cast)
         self._add_ball(cast)
         self._add_racket(cast)
         self._add_dialog(cast, ENTER_TO_START)
