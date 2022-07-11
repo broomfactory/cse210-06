@@ -27,7 +27,14 @@ class RaylibVideoService(VideoService):
         filepath = image.get_filename()
         # fixed os dependent filepath
         filepath = str(pathlib.Path(filepath))
+        print("-------------------------")
+        print()
+        print(filepath)
+        print(self._textures)
+        print()
+        print("-------------------------")
         texture = self._textures[filepath]
+
         x = position.get_x()
         y = position.get_y()
         raylib_position = pyray.Vector2(x, y)

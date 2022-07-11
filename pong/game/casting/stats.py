@@ -56,7 +56,8 @@ class Stats(Actor):
         Returns:
             A number representing the score.
         """
-        return self._score
+        #return self._score
+        pass
 
     def lose_life(self):
         """Removes one life."""

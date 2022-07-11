@@ -93,9 +93,10 @@ BALL_VELOCITY = 6
 
 # RACKET
 RACKET_GROUP = "rackets"
-RACKET_IMAGES_1 = "pong/assets/images/100.png"
-RACKET_IMAGES_2 = "pong/assets/images/101.png"
-RACKET_IMAGES_3 = "pong/assets/images/102.png"
+RACKET_IMAGES = [f"pong/assets/images/{n:03}.png" for n in range(100, 103)]
+#RACKET_IMAGES_1 = "pong/assets/images/100.png"
+#RACKET_IMAGES_2 = "pong/assets/images/101.png"
+#RACKET_IMAGES_3 = "pong/assets/images/102.png"
 RACKET_WIDTH = 28
 RACKET_HEIGHT = 106
 RACKET_RATE = 6

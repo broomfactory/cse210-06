@@ -196,7 +196,7 @@ class SceneManager:
         size = Point(RACKET_WIDTH, RACKET_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
-        animation = Animation(RACKET_IMAGES_1, RACKET_RATE)
+        animation = Animation(RACKET_IMAGES, RACKET_RATE)
         racket = Racket(body, animation)
         cast.add_actor(RACKET_GROUP, racket)
 

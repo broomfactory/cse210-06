@@ -23,7 +23,7 @@ class Racket(Actor):
         
         Returns:
             An instance of Animation.
-        """
+        """        
         return self._animation
 
     def get_body(self):
