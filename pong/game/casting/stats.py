@@ -8,31 +8,28 @@ class Stats(Actor):
     def __init__(self, debug = False):
         """Constructs a new Stats."""
         super().__init__(debug)
-        self._level = 1
-        self._lives = DEFAULT_LIVES
         self._player_1_score = 0
         self._player_2_score = 0
 
     def add_life(self):
         """Adds one life."""
-        if self._lives < MAXIMUM_LIVES:
-            self._lives += 1 
+        pass
 
-    def add_points_1(self, points):
+    def add_point_1(self):
         """Adds the given points to the score.
         
         Args:
             points: A number representing the points to add.
         """
-        self._player_1_score += points
+        self._player_1_score += 1
 
-    def add_points_2(self, points):
+    def add_point_2(self):
         """Adds the given points to the score.
         
         Args:
             points: A number representing the points to add.
         """
-        self._player_2_score += points
+        self._player_2_score += 1
 
     def get_level(self):
         """Gets the level.
@@ -40,7 +37,7 @@ class Stats(Actor):
         Returns:
             A number representing the level.
         """
-        return self._level
+        pass
 
     def get_lives(self):
         """Gets the lives.
@@ -48,21 +45,28 @@ class Stats(Actor):
         Returns:
             A number representing the lives.
         """
-        return self._lives
+        pass
   
-    def get_score(self):
+    def get_score_1(self):
         """Gets the score.
 
         Returns:
             A number representing the score.
         """
-        #return self._score
-        pass
+        return self._player_1_score
+
+    def get_score_2(self):
+        """Gets the score.
+
+        Returns:
+            A number representing the score.
+        """
+        return self._player_2_score
+        
 
     def lose_life(self):
         """Removes one life."""
-        if self._lives > 0:
-            self._lives -= 1
+        pass
     
     def next_level(self):
         """Adds one level."""
@@ -70,6 +74,5 @@ class Stats(Actor):
 
     def reset(self):
         """Resets the stats back to their default values."""
-        self._level = 1
-        self._lives = DEFAULT_LIVES
-        self._score = 0
+        self._player_1_score = 0
+        self._player_2_score = 0

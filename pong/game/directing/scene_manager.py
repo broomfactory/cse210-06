@@ -83,7 +83,7 @@ class SceneManager:
         #self._add_lives(cast)
         self._add_score(cast)
         self._add_ball(cast)
-        self._add_racket(cast)
+        self._add_racket1(cast)
         self._add_dialog(cast, ENTER_TO_START)
 
         self._add_initialize_script(script)
@@ -187,6 +187,18 @@ class SceneManager:
         cast.clear_actors(STATS_GROUP)
         stats = Stats()
         cast.add_actor(STATS_GROUP, stats)
+
+    def _add_racket1(self, cast):
+        cast.clear_actors(RACKET_GROUP)
+        x = 0 
+        y = SCREEN_HEIGHT / 2 
+        position = Point(x, y)
+        size = Point(RACKET_WIDTH, RACKET_HEIGHT)
+        velocity = Point(0, 0)
+        body = Body(position, size, velocity)
+        animation = Animation(RACKET_IMAGES, RACKET_RATE)
+        racket = Racket(body, animation)
+        cast.add_actor(RACKET_GROUP, racket)
 
     def _add_racket(self, cast):
         cast.clear_actors(RACKET_GROUP)
