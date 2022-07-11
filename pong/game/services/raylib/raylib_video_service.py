@@ -26,13 +26,7 @@ class RaylibVideoService(VideoService):
     def draw_image(self, image, position):
         filepath = image.get_filename()
         # fixed os dependent filepath
-        filepath = str(pathlib.Path(filepath))
-        print("-------------------------")
-        print()
-        print(filepath)
-        print(self._textures)
-        print()
-        print("-------------------------")
+        filepath = str(pathlib.Path(filepath))        
         texture = self._textures[filepath]
 
         x = position.get_x()
