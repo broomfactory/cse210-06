@@ -51,8 +51,8 @@ class SceneManager:
     DRAW_BALL_ACTION = DrawBallAction(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
     DRAW_HUD_ACTION = DrawHudAction(VIDEO_SERVICE)
-    DRAW_RACKET_ACTION= DrawRacketAction(VIDEO_SERVICE)
-    DRAW_RACKET_ACTION= DrawRacketAction2(VIDEO_SERVICE)
+    DRAW_RACKET_ACTION = DrawRacketAction(VIDEO_SERVICE)
+    DRAW_RACKET_ACTION2 = DrawRacketAction2(VIDEO_SERVICE)
     END_DRAWING_ACTION = EndDrawingAction(VIDEO_SERVICE)
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
@@ -85,7 +85,8 @@ class SceneManager:
         self._add_stats(cast)
         #self._add_level(cast)
         #self._add_lives(cast)
-        self._add_score(cast)
+        self._add_score_1(cast)
+        self._add_score_2(cast)
         self._add_ball(cast)
         self._add_racket1(cast)
         self._add_racket2(cast)
@@ -182,13 +183,20 @@ class SceneManager:
         label = Label(text, position)
         cast.add_actor(LIVES_GROUP, label)
 
-    def _add_score(self, cast):
+    def _add_score_1(self, cast):
         cast.clear_actors(SCORE_GROUP)
         text = Text(SCORE_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
         position = Point(CENTER_X, HUD_MARGIN)
         label = Label(text, position)
         cast.add_actor(SCORE_GROUP, label)
 
+
+    def _add_score_2(self, cast):
+        cast.clear_actors(SCORE_GROUP)
+        text = Text(SCORE_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
+        position = Point(CENTER_X, HUD_MARGIN)
+        label = Label(text, position)
+        cast.add_actor(SCORE_GROUP, label)
     def _add_stats(self, cast):
         cast.clear_actors(STATS_GROUP)
         stats = Stats()
