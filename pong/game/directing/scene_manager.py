@@ -88,6 +88,7 @@ class SceneManager:
         self._add_score(cast)
         self._add_ball(cast)
         self._add_racket1(cast)
+        self._add_racket2(cast)
         self._add_dialog(cast, ENTER_TO_START)
 
         self._add_initialize_script(script)
@@ -101,6 +102,7 @@ class SceneManager:
     def _prepare_next_level(self, cast, script):
         self._add_ball(cast)
         self._add_racket1(cast)
+        self._add_racket2(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
@@ -110,6 +112,7 @@ class SceneManager:
     def _prepare_try_again(self, cast, script):
         self._add_ball(cast)
         self._add_racket1(cast)
+        self._add_racket2(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
@@ -128,6 +131,7 @@ class SceneManager:
     def _prepare_game_over(self, cast, script):
         self._add_ball(cast)
         self._add_racket1(cast)
+        self._add_racket2(cast)
         self._add_dialog(cast, WAS_GOOD_GAME)
 
         script.clear_actions(INPUT)
@@ -202,7 +206,7 @@ class SceneManager:
         racket = Racket(body, animation)
         cast.add_actor(RACKET_GROUP_1, racket)
 
-    def _add_racket_2(self, cast):
+    def _add_racket2(self, cast):
         cast.clear_actors(RACKET_GROUP_2)
         x = SCREEN_WIDTH - RACKET_WIDTH 
         y = SCREEN_HEIGHT / 2 
