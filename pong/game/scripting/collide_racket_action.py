@@ -11,7 +11,7 @@ class CollideRacketAction(Action):
         
     def execute(self, cast, script, callback):
         ball = cast.get_first_actor(BALL_GROUP)
-        racket = cast.get_first_actor(RACKET_GROUP)
+        racket = cast.get_first_actor(RACKET_GROUP_1)
         
         ball_body = ball.get_body()
         racket_body = racket.get_body()
