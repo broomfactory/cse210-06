@@ -18,6 +18,8 @@ class Ball(Actor):
         super().__init__(debug)
         self._body = body
         self._image = image
+        self._serve = 1
+        
 
     def bounce_x(self):
         """Bounces the ball in the x direction."""
@@ -52,11 +54,20 @@ class Ball(Actor):
             An instance of Image.
         """
         return self._image
+
+    def set_serve(self, player):
+        """Sets the serving player
+        """
+        self._serve = player
         
     def release(self):
         """Release the ball in a random direction."""
         rn = random.uniform(0.9, 1.1)
-        vx = random.choice([-BALL_VELOCITY * rn, BALL_VELOCITY * rn])
-        vy = -BALL_VELOCITY
+        if self._serve == 2:        
+            vx = -BALL_VELOCITY * rn
+        else:
+            vx = BALL_VELOCITY * rn
+
+        vy = random.choice([-BALL_VELOCITY,BALL_VELOCITY])
         velocity = Point(vx, vy)
         self._body.set_velocity(velocity)

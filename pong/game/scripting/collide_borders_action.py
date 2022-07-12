@@ -20,25 +20,25 @@ class CollideBordersAction(Action):
         over_sound = Sound(OVER_SOUND)
                 
         if x < FIELD_LEFT:
+            #player1 missed
             stats = cast.get_first_actor(STATS_GROUP)
+            #award player 2 a point
             stats.add_point_2()
-            if stats.get_score_1() < 10 and stats.get_score_2() < 10:
-                callback.on_next(TRY_AGAIN) 
-            else:
-                callback.on_next(GAME_OVER)
-                self._audio_service.play_sound(over_sound)
-
+            #set next serve player1
+            ball.set_serve(1)
+            stats.set_serve_player(1)
             callback.on_next(TRY_AGAIN) 
-
+            
         elif x >= (FIELD_RIGHT - BALL_WIDTH):
+            #player2 missed
             stats = cast.get_first_actor(STATS_GROUP)
+            #award player 1 a point
             stats.add_point_1()
-            if stats.get_score_1() < 10 and stats.get_score_2() < 10:
-                callback.on_next(TRY_AGAIN) 
-            else:
-                callback.on_next(GAME_OVER)
-                self._audio_service.play_sound(over_sound)
-
+            #set next serve player 2
+            ball.set_serve(2)
+            stats.set_serve_player(2)
+            callback.on_next(TRY_AGAIN) 
+            
         if y < FIELD_TOP:
             ball.bounce_y()
             self._audio_service.play_sound(bounce_sound)

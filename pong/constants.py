@@ -13,6 +13,8 @@ SCREEN_WIDTH = 1040
 SCREEN_HEIGHT = 680
 CENTER_X = SCREEN_WIDTH / 2
 CENTER_Y = SCREEN_HEIGHT / 2
+LEFT_X = 100
+RIGHT_X = SCREEN_WIDTH - 100
 
 # FIELD
 FIELD_TOP = 60
@@ -26,9 +28,9 @@ FONT_SMALL = 32
 FONT_LARGE = 48
 
 # SOUND
-BOUNCE_SOUND = "pong/assets/sounds/boing.wav"
-WELCOME_SOUND = "pong/assets/sounds/start.wav"
-OVER_SOUND = "pong/assets/sounds/over.wav"
+BOUNCE_SOUND = "pong/assets/sounds/bounce.wav"
+WELCOME_SOUND = "pong/assets/sounds/begin.wav"
+OVER_SOUND = "pong/assets/sounds/end.wav"
 
 # TEXT
 ALIGN_CENTER = 0
@@ -81,6 +83,7 @@ RELEASE = 6
 
 # STATS
 STATS_GROUP = "stats"
+GAME_POINT = 3
 DEFAULT_LIVES = 3
 MAXIMUM_LIVES = 5
 
@@ -109,6 +112,7 @@ WAS_GOOD_GAME = "GAME OVER"
 
 # SCORE
 HUD_MARGIN = 15
-SCORE_GROUP = "score"
+SCORE_GROUP_1 = "score1"
+SCORE_GROUP_2 = "score2"
 SCORE_FORMAT = "SCORE: {}"
 POINTS = 1

@@ -12,6 +12,7 @@ from game.scripting.change_scene_action import ChangeSceneAction
 from game.scripting.check_over_action import CheckOverAction
 from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_racket_action import CollideRacketAction
+from game.scripting.collide_racket_action2 import CollideRacketAction2
 from game.scripting.control_racket_action import ControlRacketAction
 from game.scripting.control_racket_player2_action import ControlRacketAction2
 from game.scripting.draw_ball_action import DrawBallAction
@@ -47,6 +48,7 @@ class SceneManager:
     CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_RACKET_ACTION = CollideRacketAction(PHYSICS_SERVICE, AUDIO_SERVICE)
+    COLLIDE_RACKET_ACTION2 = CollideRacketAction2(PHYSICS_SERVICE, AUDIO_SERVICE)
     CONTROL_RACKET_ACTION = ControlRacketAction(KEYBOARD_SERVICE)
     CONTROL_RACKET_ACTION_2 = ControlRacketAction2(KEYBOARD_SERVICE)
     DRAW_BALL_ACTION = DrawBallAction(VIDEO_SERVICE)
@@ -136,12 +138,21 @@ class SceneManager:
         self._add_ball(cast)
         self._add_racket1(cast)
         self._add_racket2(cast)
-        self._add_dialog(cast, WAS_GOOD_GAME)
+
+        stats = cast.get_first_actor(STATS_GROUP)
+        if stats.get_score_1() > stats.get_score_2():
+            winner = "Player 1 Wins!"
+        else:
+            winner = "Player 2 Wins!"
+
+        self._add_dialog(cast, winner)
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(NEW_GAME, 5))
         script.clear_actions(UPDATE)
         self._add_output_script(script)
+        script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, OVER_SOUND))
+        
 
     # ----------------------------------------------------------------------------------------------
     # casting methods
@@ -152,15 +163,25 @@ class SceneManager:
         ball.release()
 
     def _add_ball(self, cast):
+        #Find out whose serve it is
+        stats = cast.get_first_actor(STATS_GROUP)
+        serve = stats.get_serve_player()        
         cast.clear_actors(BALL_GROUP)
-        x = CENTER_X - BALL_WIDTH / 2
-        y = SCREEN_HEIGHT - RACKET_HEIGHT - BALL_HEIGHT  
+        
+        if serve == 1:
+            x = RACKET_WIDTH + 1
+        else:
+            x = SCREEN_WIDTH - RACKET_WIDTH - BALL_WIDTH - 1
+
+        y = CENTER_Y + RACKET_HEIGHT /2
+        
         position = Point(x, y)
         size = Point(BALL_WIDTH, BALL_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
         image = Image(BALL_IMAGE)
         ball = Ball(body, image, True)
+        ball.set_serve(serve)
         cast.add_actor(BALL_GROUP, ball)
 
     
@@ -172,34 +193,20 @@ class SceneManager:
         label = Label(text, position)
         cast.add_actor(DIALOG_GROUP, label)
 
-    # def _add_level(self, cast):
-    #     cast.clear_actors(LEVEL_GROUP)
-    #     text = Text(LEVEL_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_LEFT)
-    #     position = Point(HUD_MARGIN, HUD_MARGIN)
-    #     label = Label(text, position)
-    #     cast.add_actor(LEVEL_GROUP, label)
-
-    # def _add_lives(self, cast):
-    #     cast.clear_actors(LIVES_GROUP)
-    #     text = Text(LIVES_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_RIGHT)
-    #     position = Point(SCREEN_WIDTH - HUD_MARGIN, HUD_MARGIN)
-    #     label = Label(text, position)
-    #     cast.add_actor(LIVES_GROUP, label)
-
     def _add_score_1(self, cast):
-        cast.clear_actors(SCORE_GROUP)
+        cast.clear_actors(SCORE_GROUP_1)
         text = Text(SCORE_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
-        position = Point(CENTER_X, HUD_MARGIN)
+        position = Point(LEFT_X, HUD_MARGIN)
         label = Label(text, position)
-        cast.add_actor(SCORE_GROUP, label)
+        cast.add_actor(SCORE_GROUP_1, label)
 
 
     def _add_score_2(self, cast):
-        cast.clear_actors(SCORE_GROUP)
+        cast.clear_actors(SCORE_GROUP_2)
         text = Text(SCORE_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
-        position = Point(CENTER_X, HUD_MARGIN)
+        position = Point(RIGHT_X, HUD_MARGIN)
         label = Label(text, position)
-        cast.add_actor(SCORE_GROUP, label)
+        cast.add_actor(SCORE_GROUP_2, label)
 
     def _add_stats(self, cast):
         cast.clear_actors(STATS_GROUP)
@@ -266,6 +273,7 @@ class SceneManager:
         script.add_action(UPDATE, self.MOVE_RACKET_ACTION2)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_RACKET_ACTION)
+        script.add_action(UPDATE, self.COLLIDE_RACKET_ACTION2)
         script.add_action(UPDATE, self.MOVE_RACKET_ACTION)
         script.add_action(UPDATE, self.MOVE_RACKET_ACTION2)
         script.add_action(UPDATE, self.CHECK_OVER_ACTION)

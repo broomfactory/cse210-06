@@ -1,5 +1,7 @@
+import random
 from constants import *
 from game.casting.actor import Actor
+
 
 
 class Stats(Actor):
@@ -10,10 +12,7 @@ class Stats(Actor):
         super().__init__(debug)
         self._player_1_score = 0
         self._player_2_score = 0
-
-    def add_life(self):
-        """Adds one life."""
-        pass
+        self._serve = random.randint(1,2)
 
     def add_point_1(self):
         """Adds the given points to the score.
@@ -30,23 +29,7 @@ class Stats(Actor):
             points: A number representing the points to add.
         """
         self._player_2_score += 1
-
-    def get_level(self):
-        """Gets the level.
-
-        Returns:
-            A number representing the level.
-        """
-        pass
-
-    def get_lives(self):
-        """Gets the lives.
-
-        Returns:
-            A number representing the lives.
-        """
-        pass
-  
+   
     def get_score_1(self):
         """Gets the score.
 
@@ -62,17 +45,24 @@ class Stats(Actor):
             A number representing the score.
         """
         return self._player_2_score
-        
 
-    def lose_life(self):
-        """Removes one life."""
-        pass
+    def get_serve_player(self):
+        """Gets the number of the player whose serve it is
+
+        Returns: Either 1 or 2        
+        """
+        return self._serve
+
+    def set_serve_player(self, player_number):
+        """Gets the number of the player whose serve it is
+
+        Returns: Either 1 or 2        
+        """
+        self._serve = player_number
     
-    def next_level(self):
-        """Adds one level."""
-        self._level += 1
 
     def reset(self):
         """Resets the stats back to their default values."""
         self._player_1_score = 0
         self._player_2_score = 0
+        self._serve = random.randint(1,2)
