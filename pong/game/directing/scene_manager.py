@@ -176,12 +176,12 @@ class SceneManager:
     #     label = Label(text, position)
     #     cast.add_actor(LEVEL_GROUP, label)
 
-    def _add_lives(self, cast):
-        cast.clear_actors(LIVES_GROUP)
-        text = Text(LIVES_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_RIGHT)
-        position = Point(SCREEN_WIDTH - HUD_MARGIN, HUD_MARGIN)
-        label = Label(text, position)
-        cast.add_actor(LIVES_GROUP, label)
+    # def _add_lives(self, cast):
+    #     cast.clear_actors(LIVES_GROUP)
+    #     text = Text(LIVES_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_RIGHT)
+    #     position = Point(SCREEN_WIDTH - HUD_MARGIN, HUD_MARGIN)
+    #     label = Label(text, position)
+    #     cast.add_actor(LIVES_GROUP, label)
 
     def _add_score_1(self, cast):
         cast.clear_actors(SCORE_GROUP)
@@ -197,6 +197,7 @@ class SceneManager:
         position = Point(CENTER_X, HUD_MARGIN)
         label = Label(text, position)
         cast.add_actor(SCORE_GROUP, label)
+        
     def _add_stats(self, cast):
         cast.clear_actors(STATS_GROUP)
         stats = Stats()
@@ -243,6 +244,7 @@ class SceneManager:
         script.add_action(OUTPUT, self.DRAW_HUD_ACTION)
         script.add_action(OUTPUT, self.DRAW_BALL_ACTION)
         script.add_action(OUTPUT, self.DRAW_RACKET_ACTION)
+        script.add_action(OUTPUT, self.DRAW_RACKET_ACTION2)
         script.add_action(OUTPUT, self.DRAW_DIALOG_ACTION)
         script.add_action(OUTPUT, self.END_DRAWING_ACTION)
 
