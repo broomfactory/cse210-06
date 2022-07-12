@@ -24,6 +24,7 @@ from game.scripting.initialize_devices_action import InitializeDevicesAction
 from game.scripting.load_assets_action import LoadAssetsAction
 from game.scripting.move_ball_action import MoveBallAction
 from game.scripting.move_racket_action import MoveRacketAction
+from game.scripting.move_racket_action2 import MoveRacketAction2
 from game.scripting.play_sound_action import PlaySoundAction
 from game.scripting.release_devices_action import ReleaseDevicesAction
 from game.scripting.start_drawing_action import StartDrawingAction
@@ -58,6 +59,7 @@ class SceneManager:
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
     MOVE_BALL_ACTION = MoveBallAction()
     MOVE_RACKET_ACTION = MoveRacketAction()
+    MOVE_RACKET_ACTION2 = MoveRacketAction2()
     RELEASE_DEVICES_ACTION = ReleaseDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     START_DRAWING_ACTION = StartDrawingAction(VIDEO_SERVICE)
     UNLOAD_ASSETS_ACTION = UnloadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
@@ -126,6 +128,7 @@ class SceneManager:
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, self.CONTROL_RACKET_ACTION)
+        script.add_action(INPUT, self.CONTROL_RACKET_ACTION_2)
         self._add_update_script(script)
         self._add_output_script(script)
 
@@ -197,7 +200,7 @@ class SceneManager:
         position = Point(CENTER_X, HUD_MARGIN)
         label = Label(text, position)
         cast.add_actor(SCORE_GROUP, label)
-        
+
     def _add_stats(self, cast):
         cast.clear_actors(STATS_GROUP)
         stats = Stats()
@@ -260,7 +263,9 @@ class SceneManager:
         script.clear_actions(UPDATE)
         script.add_action(UPDATE, self.MOVE_BALL_ACTION)
         script.add_action(UPDATE, self.MOVE_RACKET_ACTION)
+        script.add_action(UPDATE, self.MOVE_RACKET_ACTION2)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_RACKET_ACTION)
         script.add_action(UPDATE, self.MOVE_RACKET_ACTION)
+        script.add_action(UPDATE, self.MOVE_RACKET_ACTION2)
         script.add_action(UPDATE, self.CHECK_OVER_ACTION)
