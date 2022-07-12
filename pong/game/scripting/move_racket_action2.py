@@ -18,9 +18,9 @@ class MoveRacketAction2(Action):
         position = position.add(velocity)
 
         if y < 0:
-            position = Point(0, position.get_x())
-        elif y > (SCREEN_WIDTH - RACKET_WIDTH):
-            position = Point(SCREEN_WIDTH - RACKET_WIDTH, position.get_x())
+            position = Point(position.get_x(), 0)
+        elif y > (SCREEN_HEIGHT - RACKET_HEIGHT):
+            position = Point(position.get_x(), SCREEN_HEIGHT - RACKET_HEIGHT)
             
         body.set_position(position)
         

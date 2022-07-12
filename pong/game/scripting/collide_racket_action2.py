@@ -3,7 +3,7 @@ from game.casting.sound import Sound
 from game.scripting.action import Action
 
 
-class CollideRacketAction(Action):
+class CollideRacketAction2(Action):
 
     def __init__(self, physics_service, audio_service):
         self._physics_service = physics_service
@@ -11,7 +11,7 @@ class CollideRacketAction(Action):
         
     def execute(self, cast, script, callback):
         ball = cast.get_first_actor(BALL_GROUP)
-        racket = cast.get_first_actor(RACKET_GROUP_1)
+        racket = cast.get_first_actor(RACKET_GROUP_2)
         
         ball_body = ball.get_body()
         racket_body = racket.get_body()
